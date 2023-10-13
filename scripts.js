@@ -4,11 +4,11 @@
 
     function getComputerChoice() {
         if (getRandomInt(3) === 0) {
-            return "Rock";
+            return "rock";
         } else if (getRandomInt(3) === 1) {
-            return "Paper";
+            return "paper";
         } else {
-            return "Scissors";
+            return "scissors";
         }
     }
 
@@ -24,22 +24,22 @@
             console.error("Undefined weapon");
         } else if (playerSelection == computerSelection) {
             console.log(tieMessage);
-        } else if (playerSelection == "Rock" && computerSelection == "Scissors") {
+        } else if (playerSelection == "rock" && computerSelection == "scissors") {
             console.log(winMessage);
             playerScore += 1;
-        } else if (playerSelection == "Paper" && computerSelection == "Rock") {
+        } else if (playerSelection == "paper" && computerSelection == "rock") {
             console.log(winMessage);
             playerScore += 1;
-        } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
+        } else if (playerSelection == "scissors" && computerSelection == "paper") {
             console.log(winMessage);
             playerScore += 1;
-        } else if (playerSelection == "Rock" && computerSelection == "Paper") {
+        } else if (playerSelection == "rock" && computerSelection == "Paper") {
             console.log(loseMessage)
             computerScore += 1;
-        } else if (playerSelection == "Paper" && computerSelection == "Scissors") {
+        } else if (playerSelection == "paper" && computerSelection == "scissors") {
             console.log(loseMessage)
             computerScore += 1;
-        } else if (playerSelection == "Scissors" && computerSelection == "Rock") {
+        } else if (playerSelection == "scissors" && computerSelection == "rock") {
             console.log(loseMessage)
             computerScore += 1;
         }
@@ -62,10 +62,20 @@
     function game() {
 
         for (let i = 0; i < 5; i++) {
-            const playerSelection = window.prompt("Choose your weapon");
-            const computerSelection = getComputerChoice();
-            playRound(playerSelection, computerSelection);
+            let playerSelection;
+            let validInput = false;
+
+            while (!validInput) {
+            playerSelection = window.prompt("Choose your weapon").toLowerCase();
+            if (playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors") {
+                validInput = true;
+        } else {
+            alert("That is not a valid weapon");
         }
+        }
+        const computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+    }
 
         winnerIs(playerScore, computerScore);
     }
